@@ -1,3 +1,15 @@
-<p>pokelist works!</p>
+<h1 class="title is-1">PokéList</h1>
 
-<!-- <app-pokecard></app-pokecard> -->
+<div class="field has-addons">
+  <div class="control">
+    <input class="input" type="text" placeholder="Max: {{ pokeInfo.count }}" [(ngModel)]="count"
+      (keyup.enter)="searchByCount()">
+  </div>
+  <div class="control">
+    <a class="button is-info" (click)="searchByCount()">
+      Afficher
+    </a>
+  </div>
+</div>
+
+<app-pokecard [pokemons]="pokemons"></app-pokecard>

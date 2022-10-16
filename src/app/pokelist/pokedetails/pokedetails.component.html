@@ -1,0 +1,18 @@
+<div class="content box">
+    <div class="block">
+        <h1 class="title is-1">{{ pkm.name | titlecase }} #{{ pkm.id | number : '3.0-0'}}</h1>
+    </div>
+    <div class="block">
+        <div class="columns">
+            <div class="column is-3">
+                <figure class="image">
+                    <img class="" [src]="pkm.sprites.front_default" [alt]="pkm.name">
+                </figure>
+
+            </div>
+            <div class="column">
+                <p class="">{{ pkm.species | json }}</p>
+            </div>
+        </div>
+    </div>
+</div>
