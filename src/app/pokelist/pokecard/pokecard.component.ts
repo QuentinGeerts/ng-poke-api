@@ -5,7 +5,7 @@ import { Pokemon } from '../models/pokemon';
 @Component({
   selector: 'app-pokecard',
   templateUrl: './pokecard.component.html',
-  styleUrls: ['./pokecard.component.scss']
+  styleUrls: ['./pokecard.component.scss', '../pokelist.component.scss']
 })
 export class PokecardComponent implements OnInit {
 
@@ -16,5 +16,7 @@ export class PokecardComponent implements OnInit {
 
   ngOnInit (): void {
   }
+  
+
 
 }

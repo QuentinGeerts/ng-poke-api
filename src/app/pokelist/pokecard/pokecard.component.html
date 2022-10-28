@@ -1,23 +1,25 @@
 <div class="columns is-flex-wrap-wrap">
-    <div class="column is-one-fifth" *ngFor="let pokemon of pokemons">
+    <div class="column is-2 my-1" *ngFor="let pokemon of pokemons">
         <div class="card">
             <a routerLink="details/{{ pokemon.id }}">
                 <div class="card-image">
-                    <figure class="image is-square">
+                    <figure class="image">
                         <img [src]="pokemon.details.sprites.front_default" alt="{{ pokemon.details.name }}">
                     </figure>
                 </div>
                 <div class="card-content">
                     <div class="media">
                         <div class="media-content">
-                            <p class="title is-5">{{ pokemon.details.name | titlecase }} <br>#{{pokemon.id | number : '3.0-0'}}</p>
+                            <p class="title is-5">{{ pokemon.details.name | titlecase }} <br>#{{pokemon.id | number
+                                :'3.0-0'}}</p>
                         </div>
                     </div>
 
                     <div class="content">
                         <div class="tags">
-                            <span *ngFor="let typePokemon of pokemon.details.types" class="tag">
-                                {{ typePokemon.type.name }}
+                            <span *ngFor="let typePokemon of pokemon.details.types" class="tag"
+                                [ngClass]="typePokemon.type.name">
+                                {{ typePokemon.type.name | titlecase }}
                             </span>
                         </div>
                     </div>

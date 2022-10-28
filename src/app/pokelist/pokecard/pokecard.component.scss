@@ -1,0 +1,25 @@
+.tag {
+    color: white;
+    font-weight: bold;
+}
+
+.bordered {
+    border: 1px solid black;
+}
+
+.columns .column {
+}
+
+.columns .column .card-image {
+    width: 100%;
+}
+
+.column .card-image figure {
+    // width: 100%;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+}
+
+.columns .column .card-image figure img {
+}

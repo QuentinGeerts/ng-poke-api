@@ -2,13 +2,23 @@
 
 <div class="field has-addons">
   <div class="control">
-    <input class="input" type="text" placeholder="Max: {{ pokeInfo.count }}" [(ngModel)]="count"
+    <input class="input" type="text" placeholder="Max: {{ pokeInfo ? pokeInfo.count : 0 }}" [(ngModel)]="count"
       (keyup.enter)="searchByCount()">
   </div>
   <div class="control">
     <a class="button is-info" (click)="searchByCount()">
       Afficher
     </a>
+  </div>
+</div>
+
+<div *ngIf="pokemons.length === 0" class="columns is-centered my-6">
+  <div class="column is-half">
+    <p class="has-text-centered">
+      <span class="icon" >
+        <i class="fa-solid fa-spinner fa-pulse fa-2xl"></i>
+      </span>
+    </p>
   </div>
 </div>
 

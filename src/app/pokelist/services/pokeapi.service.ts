@@ -12,26 +12,51 @@ import { Species } from '../models/species';
 export class PokeapiService {
 
   BASE_URL: string = 'https://pokeapi.co/api/v2/pokemon';
-  API_URL: string = 'https://pokeapi.co/api/v2/pokemon?limit=__count__&offset=0';
+  API_URL: string = 'https://pokeapi.co/api/v2/pokemon?limit=__count__&offset=__offset__';
 
-  constructor (
-    private _httpClient: HttpClient
-  ) { }
+  pokemons: Pokemon[] = [];
 
-  get (count: number = 10) {
-    return this._httpClient.get<Resources>(this.API_URL.replace("__count__", count.toString()));
-  }
+  constructor (private _httpClient: HttpClient) { }
 
-  getDetails (url: string) {
+  private getDetails (url: string) {
     return this._httpClient.get<Details>(url);
   }
 
-  getSpecies (url: string) {
+  private getSpecies (url: string) {
     return this._httpClient.get<Species>(url);
   }
 
-  getById (id: string) {
-    return this._httpClient.get<Details>(`${this.BASE_URL}/${id}`);
+  getAll (count: number = 10, offset: number = 0) {
+    return this._httpClient.get<Resources>(
+      this.API_URL.replace("__count__", count.toString().replace("__offset__", offset.toString()))
+    );
   }
 
+  getById (id: string) {
+    return this._httpClient.get<Resources>(`${this.BASE_URL}/${id}`);
+  }
+
+  mapPokemon (rsc: Resources) {
+
+    // Clear array
+    this.pokemons.splice(0, this.pokemons.length);
+
+    console.log('rsc :>> ', rsc);
+
+    rsc.results.forEach((pokemonInfo) => {
+      this.getDetails(pokemonInfo.url)
+        .subscribe((details: Details) => {
+          this.getSpecies(details.species.url)
+            .subscribe((species: Species) => {
+              const poke: Pokemon = { id: details.id, details: details, species: species };
+              this.pokemons.push(poke);
+
+              console.log('poke :>> ', poke);
+
+              // Tri par id
+              this.pokemons.sort((a, b) => a.id - b.id);
+            });
+        });
+    });
+  }
 }
